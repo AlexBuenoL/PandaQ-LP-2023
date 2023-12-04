@@ -2,10 +2,19 @@ grammar pandaQ;
 
 root : query ;
 
-query : 'select * from' TABLE ';' 
+query : 'select' camps 'from' taula ';' 
       ;
 
-TABLE : [a-zA-Z_][a-zA-Z0-9_]* 
+camps : '*' | cols
       ;
+
+cols : ID (',' ID)*
+     ;
+
+taula : ID 
+      ;
+
+ID : [a-zA-Z_][a-zA-Z0-9_]* 
+   ;
 
 WS  : [ \t\n\r]+ -> skip ;
