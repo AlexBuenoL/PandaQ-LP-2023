@@ -23,8 +23,8 @@ if st.button("Executa"):
       visitor = TreeVisitor()
       visitor.visit(tree)
   else:
-    print(parser.getNumberOfSyntaxErrors(), 'errors de sintaxi.')
-    print(tree.toStringTree(recog=parser))
+    st.write(parser.getNumberOfSyntaxErrors(), 'errors de sintaxi.')
+    st.write(tree.toStringTree(recog=parser))
 
 
 
