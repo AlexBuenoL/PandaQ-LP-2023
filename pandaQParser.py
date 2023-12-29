@@ -671,7 +671,6 @@ class pandaQParser ( Parser ):
                 self.enterOuterAlt(localctx, 2)
                 self.state = 82
                 self.match(pandaQParser.ID)
-
                 self.state = 83
                 self.match(pandaQParser.T__12)
                 pass
