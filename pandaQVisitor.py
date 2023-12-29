@@ -14,8 +14,13 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#query.
-    def visitQuery(self, ctx:pandaQParser.QueryContext):
+    # Visit a parse tree produced by pandaQParser#selectNormal.
+    def visitSelectNormal(self, ctx:pandaQParser.SelectNormalContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#selectOrder.
+    def visitSelectOrder(self, ctx:pandaQParser.SelectOrderContext):
         return self.visitChildren(ctx)
 
 
@@ -36,6 +41,21 @@ class pandaQVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by pandaQParser#expr.
     def visitExpr(self, ctx:pandaQParser.ExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#order.
+    def visitOrder(self, ctx:pandaQParser.OrderContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#asc.
+    def visitAsc(self, ctx:pandaQParser.AscContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#desc.
+    def visitDesc(self, ctx:pandaQParser.DescContext):
         return self.visitChildren(ctx)
 
 

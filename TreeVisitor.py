@@ -17,7 +17,34 @@ class TreeVisitor(pandaQVisitor):
     self.visit(query)
 
 
-  def visitQuery(self, ctx):
+  # def visitQuery(self, ctx):
+  #   [select, camps, From, taula, OrderBy, order, fin] = list(ctx.getChildren())
+  #   query = self.visit
+
+  #   # obtenir el nom i el path de la taula
+  #   nom_taula = self.visit(taula)
+  #   path_taula = "data/" + nom_taula + ".csv"
+
+  #   try:
+  #     # obtenir la taula
+  #     self.data = pd.read_csv(path_taula)
+
+  #     # taula buida que sera la que es modificara amb els visitors i la que es mostrara
+  #     self.new_data = pd.DataFrame()
+
+  #     # es visiten els camps de la taula a consultar per obtenir la taula 
+  #     # que es mostrara a 'new_data'
+  #     self.visit(camps)
+
+  #     self.visit(order)
+
+  #     st.write("Taula: " + nom_taula)
+  #     st.write(self.new_data)
+        
+  #   except FileNotFoundError:
+  #     st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
+
+  def visitSelectNormal(self, ctx):
     [select, camps, From, taula, fin] = list(ctx.getChildren())
 
     # obtenir el nom i el path de la taula
@@ -41,6 +68,32 @@ class TreeVisitor(pandaQVisitor):
     except FileNotFoundError:
       st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
 
+  def visitSelectOrder(self, ctx):
+    [select, camps, From, taula, OrderBy, order, fin] = list(ctx.getChildren())
+
+    # obtenir el nom i el path de la taula
+    nom_taula = self.visit(taula)
+    path_taula = "data/" + nom_taula + ".csv"
+
+    try:
+      # obtenir la taula
+      self.data = pd.read_csv(path_taula)
+
+      # taula buida que sera la que es modificara amb els visitors i la que es mostrara
+      self.new_data = pd.DataFrame()
+
+      # es visiten els camps de la taula a consultar per obtenir la taula 
+      # que es mostrara a 'new_data'
+      self.visit(camps)
+
+      self.visit(order)
+
+      st.write("Taula: " + nom_taula)
+      st.write(self.new_data)
+        
+    except FileNotFoundError:
+      st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
+    
 
   def visitTaula(self, ctx):
     return ctx.ID().getText()
@@ -76,6 +129,21 @@ class TreeVisitor(pandaQVisitor):
       return f"({self.visit(ctx.expr())})"
     
   
+  def visitOrder(self, ctx):
+    order_info = [self.visit(camp) for camp in ctx.camp_order()]
+    columns, ascendings = zip(*order_info)
+
+    self.new_data.sort_values(by=list(columns), ascending=list(ascendings), inplace=True)
+
+
+  def visitAsc(self, ctx):
+    return ctx.ID().getText(), True
+
+
+  def visitDesc(self, ctx):
+    return ctx.ID().getText(), False
+
+
   def visitID (self, ctx):
     return ctx.getText()
 

@@ -2,7 +2,9 @@ grammar pandaQ ;
 
 root : query ;
 
-query : 'select' camps 'from' taula ';' ;
+query : 'select' camps 'from' taula ';'                         # selectNormal
+      | 'select' camps 'from' taula 'order by' order ';'        # selectOrder
+      ;
 
 camps : '*' | col (',' col)* ;
 
@@ -17,6 +19,13 @@ expr : expr ('*' | '/') expr
      | DECIMAL
      | ID
      ;
+
+order : camp_order (',' camp_order)* ;
+
+camp_order : ID           # asc
+           | ID 'asc'     # asc
+           | ID 'desc'    # desc
+           ;
 
 taula : ID ;
 
