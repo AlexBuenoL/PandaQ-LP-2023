@@ -17,33 +17,6 @@ class TreeVisitor(pandaQVisitor):
     self.visit(query)
 
 
-  # def visitQuery(self, ctx):
-  #   [select, camps, From, taula, OrderBy, order, fin] = list(ctx.getChildren())
-  #   query = self.visit
-
-  #   # obtenir el nom i el path de la taula
-  #   nom_taula = self.visit(taula)
-  #   path_taula = "data/" + nom_taula + ".csv"
-
-  #   try:
-  #     # obtenir la taula
-  #     self.data = pd.read_csv(path_taula)
-
-  #     # taula buida que sera la que es modificara amb els visitors i la que es mostrara
-  #     self.new_data = pd.DataFrame()
-
-  #     # es visiten els camps de la taula a consultar per obtenir la taula 
-  #     # que es mostrara a 'new_data'
-  #     self.visit(camps)
-
-  #     self.visit(order)
-
-  #     st.write("Taula: " + nom_taula)
-  #     st.write(self.new_data)
-        
-  #   except FileNotFoundError:
-  #     st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
-
   def visitSelectNormal(self, ctx):
     [select, camps, From, taula, fin] = list(ctx.getChildren())
 
@@ -68,6 +41,7 @@ class TreeVisitor(pandaQVisitor):
     except FileNotFoundError:
       st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
 
+
   def visitSelectOrder(self, ctx):
     [select, camps, From, taula, OrderBy, order, fin] = list(ctx.getChildren())
 
@@ -86,6 +60,7 @@ class TreeVisitor(pandaQVisitor):
       # que es mostrara a 'new_data'
       self.visit(camps)
 
+      # visitor per ordenar la taula
       self.visit(order)
 
       st.write("Taula: " + nom_taula)
@@ -136,10 +111,12 @@ class TreeVisitor(pandaQVisitor):
     self.new_data.sort_values(by=list(columns), ascending=list(ascendings), inplace=True) # s'ordena la taula
 
 
+  # si es posa 'asc' o no es posa res anira a aquest visitor per ordenar ascendentment
   def visitAsc(self, ctx):
     return ctx.ID().getText(), True
 
 
+  # si es posa 'desc' anira a aquest visitor per ordenar descendentment
   def visitDesc(self, ctx):
     return ctx.ID().getText(), False
 
