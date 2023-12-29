@@ -253,22 +253,49 @@ class pandaQParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self):
-            return self.getTypedRuleContext(pandaQParser.ExprContext,0)
-
-
-        def ID(self):
-            return self.getToken(pandaQParser.ID, 0)
 
         def getRuleIndex(self):
             return pandaQParser.RULE_col
 
+     
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
+
+
+
+    class CampCalculatContext(ColContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a pandaQParser.ColContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def expr(self):
+            return self.getTypedRuleContext(pandaQParser.ExprContext,0)
+
+        def ID(self):
+            return self.getToken(pandaQParser.ID, 0)
+
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCol" ):
-                return visitor.visitCol(self)
+            if hasattr( visitor, "visitCampCalculat" ):
+                return visitor.visitCampCalculat(self)
             else:
                 return visitor.visitChildren(self)
 
+
+    class CampContext(ColContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a pandaQParser.ColContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def ID(self):
+            return self.getToken(pandaQParser.ID, 0)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCamp" ):
+                return visitor.visitCamp(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -281,6 +308,7 @@ class pandaQParser ( Parser ):
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
             if la_ == 1:
+                localctx = pandaQParser.CampCalculatContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 31
                 self.expr(0)
@@ -291,6 +319,7 @@ class pandaQParser ( Parser ):
                 pass
 
             elif la_ == 2:
+                localctx = pandaQParser.CampContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 35
                 self.match(pandaQParser.ID)

@@ -24,8 +24,13 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#col.
-    def visitCol(self, ctx:pandaQParser.ColContext):
+    # Visit a parse tree produced by pandaQParser#campCalculat.
+    def visitCampCalculat(self, ctx:pandaQParser.CampCalculatContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#camp.
+    def visitCamp(self, ctx:pandaQParser.CampContext):
         return self.visitChildren(ctx)
 
 

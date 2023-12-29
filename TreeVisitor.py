@@ -6,6 +6,12 @@ from pandaQVisitor import pandaQVisitor
 
 class TreeVisitor(pandaQVisitor):
 
+  # atributs de la classe per poder accedir a les taules desde les funcions del visitor
+  def __init__(self):
+    self.data = None 
+    self.new_data = None
+
+
   def visitRoot(self, ctx):
     [query] = list(ctx.getChildren())
     self.visit(query)
@@ -20,27 +26,17 @@ class TreeVisitor(pandaQVisitor):
 
     try:
       # obtenir la taula
-      data = pd.read_csv(path_taula)
+      self.data = pd.read_csv(path_taula)
 
-      # si les columnes seleccionades no son totes,
-      # es filtra la taula
-      cols = self.visit(camps)
-      new_data = pd.DataFrame()
+      # taula buida que sera la que es modificara amb els visitors i la que es mostrara
+      self.new_data = pd.DataFrame()
 
-      if cols != '*':
-        for col in cols:
-          if "as" not in col:
-            new_data[col] = data[col]
-          else:
-            # es una columna calculada
-            [expr, new_col] = col.split(" as ")
-            new_data[new_col] = self.eval_expr(expr, data)
-
-      else:
-        new_data = data
+      # es visiten els camps de la taula a consultar per obtenir la taula 
+      # que es mostrara a 'new_data'
+      self.visit(camps)
 
       st.write("Taula: " + nom_taula)
-      st.write(new_data)
+      st.write(self.new_data)
         
     except FileNotFoundError:
       st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
@@ -51,18 +47,23 @@ class TreeVisitor(pandaQVisitor):
   
 
   def visitCamps(self, ctx):
-    if ctx.getText() == '*':
-        return '*'
+    if ctx.getText() == '*':        # si es vol consultar tota la taula, la taula que es mostra es tota
+        self.new_data = self.data
     else:
-        return [self.visit(col) for col in ctx.col()]
+      for col in ctx.col():         # si no, es visiten les diferents columnes a consultar -> campCalculat o camp
+        self.visit(col)
+           
     
-  
-  def visitCol(self, ctx):
-    if ctx.getChildCount() == 1:
-        return ctx.ID().getText()
-    else:
-        [expr, As, ID] = list(ctx.getChildren())
-        return self.visit(expr) + " as " + ctx.ID().getText()
+  def visitCampCalculat(self, ctx):
+    [expr, As, id] = list(ctx.getChildren())
+    expr_res = self.visit(expr)     # s'obte la expressio de la nova columna calculada
+    new_col = ctx.ID().getText()    # s'obte el nom de la nova columna
+    self.new_data[new_col] = self.eval_expr(expr_res) # es crea la nova columna de new_data amb el nom escollit i amb els valors calculats
+     
+
+  def visitCamp(self, ctx):    
+    id = ctx.ID().getText()
+    self.new_data[id] = self.data[id]  # com es un camp normal, simplement es copia la columna de la taula original a la nova
 
 
   def visitExpr(self, ctx):
@@ -79,20 +80,17 @@ class TreeVisitor(pandaQVisitor):
     return ctx.getText()
 
 
-  def eval_expr(self, expr, data):
+  def eval_expr(self, expr):
     try:
-        # Crear un diccionario con las variables disponibles en el DataFrame
-        variables = {col: data[col] for col in data.columns}
+      variables = {col: self.data[col] for col in self.data.columns}
 
-        # Evaluar la expresión utilizando pandas.eval
-        result = pd.eval(expr, engine='python', local_dict=variables)
+      result = pd.eval(expr, engine='python', local_dict=variables)
 
-        # Resetear el índice si es un DataFrame
-        if isinstance(result, pd.DataFrame):
-            result = result.reset_index(drop=True)
+      if isinstance(result, pd.DataFrame):
+        result = result.reset_index(drop=True)
 
-        return result
+      return result
 
     except Exception as e:
-        st.error(f"Error al evaluar la expresión: {str(e)}")
-        return pd.Series(dtype='object')  # Devolver una Serie vacía en caso de error
+      st.error(f"Error al evaluar la expresión: {str(e)}")
+      return pd.Series(dtype='object')

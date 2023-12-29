@@ -6,7 +6,9 @@ query : 'select' camps 'from' taula ';' ;
 
 camps : '*' | col (',' col)* ;
 
-col : (expr ' as ' ID) | ID ;
+col : (expr ' as ' ID)   # campCalculat
+    | ID                 # camp
+    ;               
 
 expr : expr ('*' | '/') expr
      | expr ('+' | '-') expr
