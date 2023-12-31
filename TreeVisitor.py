@@ -153,7 +153,22 @@ class TreeVisitor(pandaQVisitor):
       self.visit(condition)
   
 
-  def visitCond_normal(self, ctx):
+  # Comparacio del 'where' amb textos i sense not
+  def visitComp_text(self, ctx):
+    [param1, op, param2] = list(ctx.getChildren())
+
+    nom_col = param1.getText()
+    valor = param2.getText()
+
+    if op.getText() == '<':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] < valor]
+      
+    elif op.getText() == '=':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] == valor]
+
+
+  # Comparacio del 'where' amb numeros i sense not
+  def visitComp_num(self, ctx):
     [param1, op, param2] = list(ctx.getChildren())
 
     nom_col = param1.getText()
@@ -164,9 +179,24 @@ class TreeVisitor(pandaQVisitor):
       
     elif op.getText() == '=':
       self.new_data = self.new_data.loc[self.new_data[nom_col] == valor]
+  
 
+  # Comparacio del 'where' amb textos i amb not
+  def visitComp_text_not(self, ctx):
+    [neg, param1, op, param2] = list(ctx.getChildren())
 
-  def visitCond_negada(self, ctx):
+    nom_col = param1.getText()
+    valor = param2.getText()
+
+    if op.getText() == '<':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] >= valor]
+      
+    elif op.getText() == '=':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] != valor]
+  
+
+  # Comparacio del 'where' amb numeros i amb not
+  def visitComp_num_not(self, ctx):
     [neg, param1, op, param2] = list(ctx.getChildren())
 
     nom_col = param1.getText()

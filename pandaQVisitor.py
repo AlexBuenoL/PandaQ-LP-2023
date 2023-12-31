@@ -69,13 +69,23 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#cond_normal.
-    def visitCond_normal(self, ctx:pandaQParser.Cond_normalContext):
+    # Visit a parse tree produced by pandaQParser#comp_text.
+    def visitComp_text(self, ctx:pandaQParser.Comp_textContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#cond_negada.
-    def visitCond_negada(self, ctx:pandaQParser.Cond_negadaContext):
+    # Visit a parse tree produced by pandaQParser#comp_num.
+    def visitComp_num(self, ctx:pandaQParser.Comp_numContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#comp_text_not.
+    def visitComp_text_not(self, ctx:pandaQParser.Comp_text_notContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#comp_num_not.
+    def visitComp_num_not(self, ctx:pandaQParser.Comp_num_notContext):
         return self.visitChildren(ctx)
 
 

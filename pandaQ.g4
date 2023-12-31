@@ -30,8 +30,10 @@ camp_order : ID           # asc
 
 conds_where : cond ('and' cond)* ;
 
-cond : (ID | NUM) ('<' | '=') (ID | NUM)        # cond_normal
-     | 'not' (ID | NUM) ('<' | '=') (ID | NUM)  # cond_negada
+cond : ID ('<' | '=') ID             # comp_text
+     | ID ('<' | '=') NUM            # comp_num
+     | ('not')? ID ('<' | '=') ID    # comp_text_not
+     | ('not')? ID ('<' | '=') NUM   # comp_num_not
      ;
 
 taula : ID ;
