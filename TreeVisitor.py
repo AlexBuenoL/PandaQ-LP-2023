@@ -68,6 +68,33 @@ class TreeVisitor(pandaQVisitor):
         
     except FileNotFoundError:
       st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
+
+  
+  def visitSelectWhere(self, ctx):
+    [select, camps, From, taula, Where, conds_where, fin] = list(ctx.getChildren())
+
+    # obtenir el nom i el path de la taula
+    nom_taula = self.visit(taula)
+    path_taula = "data/" + nom_taula + ".csv"
+
+    try:
+      # obtenir la taula
+      self.data = pd.read_csv(path_taula)
+
+      # taula buida que sera la que es modificara amb els visitors i la que es mostrara
+      self.new_data = pd.DataFrame()
+
+      # es visiten els camps de la taula a consultar per obtenir la taula 
+      # que es mostrara a 'new_data'
+      self.visit(camps)
+
+      self.visit(conds_where)
+
+      st.write("Taula: " + nom_taula)
+      st.write(self.new_data)
+        
+    except FileNotFoundError:
+      st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
     
 
   def visitTaula(self, ctx):
@@ -119,9 +146,40 @@ class TreeVisitor(pandaQVisitor):
   # si es posa 'desc' anira a aquest visitor per ordenar descendentment
   def visitDesc(self, ctx):
     return ctx.ID().getText(), False
+  
+
+  def visitConds_where(self, ctx):
+    for condition in ctx.cond():
+      self.visit(condition)
+  
+
+  def visitCond_normal(self, ctx):
+    [param1, op, param2] = list(ctx.getChildren())
+
+    nom_col = param1.getText()
+    valor = int(param2.getText())
+
+    if op.getText() == '<':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] < valor]
+      
+    elif op.getText() == '=':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] == valor]
 
 
-  def visitID (self, ctx):
+  def visitCond_negada(self, ctx):
+    [neg, param1, op, param2] = list(ctx.getChildren())
+
+    nom_col = param1.getText()
+    valor = int(param2.getText())
+
+    if op.getText() == '<':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] >= valor]
+      
+    elif op.getText() == '=':
+      self.new_data = self.new_data.loc[self.new_data[nom_col] != valor]
+
+
+  def visitID(self, ctx):
     return ctx.getText()
 
 

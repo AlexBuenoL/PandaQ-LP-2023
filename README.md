@@ -24,3 +24,5 @@ Per executar l'intèrpret:
     3: streamlit run pandaQ.py (llegir querys desde streamlit)
 
     4: streamlit run pandaQ2.py (llegir querys desde terminal)
+
+select * from countries where not region_id = 1 and not region_id = 3;

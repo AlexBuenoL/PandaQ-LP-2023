@@ -4,6 +4,7 @@ root : query ;
 
 query : 'select' camps 'from' taula ';'                         # selectNormal
       | 'select' camps 'from' taula 'order by' order ';'        # selectOrder
+      | 'select' camps 'from' taula 'where' conds_where ';'     # selectWhere
       ;
 
 camps : '*' | col (',' col)* ;
@@ -26,6 +27,12 @@ camp_order : ID           # asc
            | ID 'asc'     # asc
            | ID 'desc'    # desc
            ;
+
+conds_where : cond ('and' cond)* ;
+
+cond : (ID | NUM) ('<' | '=') (ID | NUM)        # cond_normal
+     | 'not' (ID | NUM) ('<' | '=') (ID | NUM)  # cond_negada
+     ;
 
 taula : ID ;
 

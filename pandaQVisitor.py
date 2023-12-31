@@ -24,6 +24,11 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#selectWhere.
+    def visitSelectWhere(self, ctx:pandaQParser.SelectWhereContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#camps.
     def visitCamps(self, ctx:pandaQParser.CampsContext):
         return self.visitChildren(ctx)
@@ -56,6 +61,21 @@ class pandaQVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by pandaQParser#desc.
     def visitDesc(self, ctx:pandaQParser.DescContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#conds_where.
+    def visitConds_where(self, ctx:pandaQParser.Conds_whereContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#cond_normal.
+    def visitCond_normal(self, ctx:pandaQParser.Cond_normalContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#cond_negada.
+    def visitCond_negada(self, ctx:pandaQParser.Cond_negadaContext):
         return self.visitChildren(ctx)
 
 
