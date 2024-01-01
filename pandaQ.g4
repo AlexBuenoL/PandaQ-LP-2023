@@ -2,10 +2,8 @@ grammar pandaQ ;
 
 root : query ;
 
-query : 'select' camps 'from' taula ';'                         # selectNormal
-      | 'select' camps 'from' taula 'order by' order ';'        # selectOrder
-      | 'select' camps 'from' taula 'where' conds_where ';'     # selectWhere
-      ;
+query : 'select' camps 'from' taula (where)? (orderBy)? ';' ;
+
 
 camps : '*' | col (',' col)* ;
 
@@ -21,6 +19,8 @@ expr : expr ('*' | '/') expr
      | ID
      ;
 
+orderBy : 'order by' order ;
+
 order : camp_order (',' camp_order)* ;
 
 camp_order : ID           # asc
@@ -28,12 +28,12 @@ camp_order : ID           # asc
            | ID 'desc'    # desc
            ;
 
+where : 'where' conds_where ;
+
 conds_where : cond ('and' cond)* ;
 
-cond : ID ('<' | '=') ID             # comp_text
-     | ID ('<' | '=') NUM            # comp_num
-     | ('not')? ID ('<' | '=') ID    # comp_text_not
-     | ('not')? ID ('<' | '=') NUM   # comp_num_not
+cond : ('not')? ID ('<' | '=') ID      # comp_text
+     | ('not')? ID ('<' | '=') NUM     # comp_num
      ;
 
 taula : ID ;

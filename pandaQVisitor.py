@@ -14,18 +14,8 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#selectNormal.
-    def visitSelectNormal(self, ctx:pandaQParser.SelectNormalContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by pandaQParser#selectOrder.
-    def visitSelectOrder(self, ctx:pandaQParser.SelectOrderContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by pandaQParser#selectWhere.
-    def visitSelectWhere(self, ctx:pandaQParser.SelectWhereContext):
+    # Visit a parse tree produced by pandaQParser#query.
+    def visitQuery(self, ctx:pandaQParser.QueryContext):
         return self.visitChildren(ctx)
 
 
@@ -49,6 +39,11 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#orderBy.
+    def visitOrderBy(self, ctx:pandaQParser.OrderByContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#order.
     def visitOrder(self, ctx:pandaQParser.OrderContext):
         return self.visitChildren(ctx)
@@ -64,6 +59,11 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#where.
+    def visitWhere(self, ctx:pandaQParser.WhereContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#conds_where.
     def visitConds_where(self, ctx:pandaQParser.Conds_whereContext):
         return self.visitChildren(ctx)
@@ -76,16 +76,6 @@ class pandaQVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by pandaQParser#comp_num.
     def visitComp_num(self, ctx:pandaQParser.Comp_numContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by pandaQParser#comp_text_not.
-    def visitComp_text_not(self, ctx:pandaQParser.Comp_text_notContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by pandaQParser#comp_num_not.
-    def visitComp_num_not(self, ctx:pandaQParser.Comp_num_notContext):
         return self.visitChildren(ctx)
 
 

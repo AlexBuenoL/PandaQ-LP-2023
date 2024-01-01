@@ -17,8 +17,11 @@ class TreeVisitor(pandaQVisitor):
     self.visit(query)
 
 
-  def visitSelectNormal(self, ctx):
-    [select, camps, From, taula, fin] = list(ctx.getChildren())
+  def visitQuery(self, ctx):
+    camps = ctx.camps()
+    taula = ctx.taula()
+    where = ctx.where()
+    ord = ctx.orderBy()
 
     # obtenir el nom i el path de la taula
     nom_taula = self.visit(taula)
@@ -35,70 +38,17 @@ class TreeVisitor(pandaQVisitor):
       # que es mostrara a 'new_data'
       self.visit(camps)
 
-      st.write("Taula: " + nom_taula)
-      st.write(self.new_data)
-        
-    except FileNotFoundError:
-      st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
+      if where is not None:
+        self.visit(where)
 
-
-  def visitSelectOrder(self, ctx):
-    [select, camps, From, taula, OrderBy, order, fin] = list(ctx.getChildren())
-
-    # obtenir el nom i el path de la taula
-    nom_taula = self.visit(taula)
-    path_taula = "data/" + nom_taula + ".csv"
-
-    try:
-      # obtenir la taula
-      self.data = pd.read_csv(path_taula)
-
-      # taula buida que sera la que es modificara amb els visitors i la que es mostrara
-      self.new_data = pd.DataFrame()
-
-      # es visiten els camps de la taula a consultar per obtenir la taula 
-      # que es mostrara a 'new_data'
-      self.visit(camps)
-
-      # visitor per ordenar la taula
-      self.visit(order)
+      if ord is not None:
+        self.visit(ord)
 
       st.write("Taula: " + nom_taula)
       st.write(self.new_data)
         
     except FileNotFoundError:
       st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
-
-  
-  def visitSelectWhere(self, ctx):
-    [select, camps, From, taula, Where, conds_where, fin] = list(ctx.getChildren())
-
-    # obtenir el nom i el path de la taula
-    nom_taula = self.visit(taula)
-    path_taula = "data/" + nom_taula + ".csv"
-
-    try:
-      # obtenir la taula
-      self.data = pd.read_csv(path_taula)
-
-      # taula buida que sera la que es modificara amb els visitors i la que es mostrara
-      self.new_data = pd.DataFrame()
-
-      # es visiten els camps de la taula a consultar per obtenir la taula 
-      # que es mostrara a 'new_data'
-      self.visit(camps)
-
-      self.visit(conds_where)
-
-      st.write("Taula: " + nom_taula)
-      st.write(self.new_data)
-        
-    except FileNotFoundError:
-      st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
-    
-
-  def visitTaula(self, ctx):
-    return ctx.ID().getText()
   
 
   def visitCamps(self, ctx):
@@ -129,7 +79,11 @@ class TreeVisitor(pandaQVisitor):
       return ctx.getText()
     else:
       return f"({self.visit(ctx.expr())})"
-    
+  
+
+  def visitOrderBy(self, ctx):
+    self.visit(ctx.order())
+
   
   def visitOrder(self, ctx):
     order_info = [self.visit(camp) for camp in ctx.camp_order()] # es visiten les columnes a ordenar, obtenint el nom de la columna i (asc o desc)
@@ -146,6 +100,10 @@ class TreeVisitor(pandaQVisitor):
   # si es posa 'desc' anira a aquest visitor per ordenar descendentment
   def visitDesc(self, ctx):
     return ctx.ID().getText(), False
+
+
+  def visitWhere(self, ctx):
+    self.visit(ctx.conds_where())
   
 
   def visitConds_where(self, ctx):
@@ -153,60 +111,64 @@ class TreeVisitor(pandaQVisitor):
       self.visit(condition)
   
 
-  # Comparacio del 'where' amb textos i sense not
+  # Comparacio del 'where' amb textos
   def visitComp_text(self, ctx):
-    [param1, op, param2] = list(ctx.getChildren())
+    childs = list(ctx.getChildren())
+    if len(childs) == 3:
+      neg = False
+      [param1, op, param2] = childs
+    elif len(childs) == 4:
+      neg = True
+      [_, param1, op, param2] = childs
 
     nom_col = param1.getText()
     valor = param2.getText()
 
-    if op.getText() == '<':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] < valor]
-      
-    elif op.getText() == '=':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] == valor]
+    if neg:
+      if op.getText() == '<':
+        self.new_data = self.new_data.loc[self.data[nom_col] >= valor]
+        
+      elif op.getText() == '=':
+        self.new_data = self.new_data.loc[self.data[nom_col] != valor]
+    
+    else:
+      if op.getText() == '<':
+        self.new_data = self.new_data.loc[self.data[nom_col] < valor]
+        
+      elif op.getText() == '=':
+        self.new_data = self.new_data.loc[self.data[nom_col] == valor]
 
 
-  # Comparacio del 'where' amb numeros i sense not
+  # Comparacio del 'where' amb numeros 
   def visitComp_num(self, ctx):
-    [param1, op, param2] = list(ctx.getChildren())
+    childs = list(ctx.getChildren())
+    if len(childs) == 3:
+      neg = False
+      [param1, op, param2] = childs
+    elif len(childs) == 4:
+      neg = True
+      [_, param1, op, param2] = childs
 
     nom_col = param1.getText()
     valor = int(param2.getText())
 
-    if op.getText() == '<':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] < valor]
-      
-    elif op.getText() == '=':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] == valor]
+    if neg:
+      if op.getText() == '<':
+        self.new_data = self.new_data.loc[self.data[nom_col] >= valor]
+        
+      elif op.getText() == '=':
+        self.new_data = self.new_data.loc[self.data[nom_col] != valor]
+    
+    else:
+      if op.getText() == '<':
+        self.new_data = self.new_data.loc[self.data[nom_col] < valor]
+        
+      elif op.getText() == '=':
+        self.new_data = self.new_data.loc[self.data[nom_col] == valor]
+
   
-
-  # Comparacio del 'where' amb textos i amb not
-  def visitComp_text_not(self, ctx):
-    [neg, param1, op, param2] = list(ctx.getChildren())
-
-    nom_col = param1.getText()
-    valor = param2.getText()
-
-    if op.getText() == '<':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] >= valor]
-      
-    elif op.getText() == '=':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] != valor]
-  
-
-  # Comparacio del 'where' amb numeros i amb not
-  def visitComp_num_not(self, ctx):
-    [neg, param1, op, param2] = list(ctx.getChildren())
-
-    nom_col = param1.getText()
-    valor = int(param2.getText())
-
-    if op.getText() == '<':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] >= valor]
-      
-    elif op.getText() == '=':
-      self.new_data = self.new_data.loc[self.new_data[nom_col] != valor]
+  def visitTaula(self, ctx):
+    return ctx.ID().getText()
 
 
   def visitID(self, ctx):
