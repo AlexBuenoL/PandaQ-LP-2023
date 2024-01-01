@@ -38,9 +38,11 @@ class TreeVisitor(pandaQVisitor):
       # que es mostrara a 'new_data'
       self.visit(camps)
 
+      # si s'ha afegit el 'where' es visita per fer el filtratge
       if where is not None:
         self.visit(where)
 
+      # si s'ha afegit el 'order by' es visita per ordenar les files
       if ord is not None:
         self.visit(ord)
 
@@ -52,7 +54,7 @@ class TreeVisitor(pandaQVisitor):
   
 
   def visitCamps(self, ctx):
-    if ctx.getText() == '*':        # si es vol consultar tota la taula, la taula que es mostra es tota
+    if ctx.getText() == '*':        # si es vol consultar tota la taula, la taula que es mostra es la taula original directament
         self.new_data = self.data
     else:
       for col in ctx.col():         # si no, es visiten les diferents columnes a consultar -> campCalculat o camp
@@ -114,6 +116,8 @@ class TreeVisitor(pandaQVisitor):
   # Comparacio del 'where' amb textos
   def visitComp_text(self, ctx):
     childs = list(ctx.getChildren())
+
+    # determinar si hi ha negacio
     if len(childs) == 3:
       neg = False
       [param1, op, param2] = childs
@@ -121,9 +125,11 @@ class TreeVisitor(pandaQVisitor):
       neg = True
       [_, param1, op, param2] = childs
 
+    # obtencio dels parametres de la condicio de filtratge del where
     nom_col = param1.getText()
     valor = param2.getText()
 
+    # si hi ha negacio, es filtra amb l'operador complementari
     if neg:
       if op.getText() == '<':
         self.new_data = self.new_data.loc[self.data[nom_col] >= valor]
@@ -131,6 +137,7 @@ class TreeVisitor(pandaQVisitor):
       elif op.getText() == '=':
         self.new_data = self.new_data.loc[self.data[nom_col] != valor]
     
+    # si no hi ha negacio, es filtra amb l'operador original
     else:
       if op.getText() == '<':
         self.new_data = self.new_data.loc[self.data[nom_col] < valor]
@@ -142,6 +149,8 @@ class TreeVisitor(pandaQVisitor):
   # Comparacio del 'where' amb numeros 
   def visitComp_num(self, ctx):
     childs = list(ctx.getChildren())
+
+    # determinar si hi ha negacio
     if len(childs) == 3:
       neg = False
       [param1, op, param2] = childs
@@ -149,9 +158,11 @@ class TreeVisitor(pandaQVisitor):
       neg = True
       [_, param1, op, param2] = childs
 
+    # obtencio dels parametres de la condicio de filtratge del where
     nom_col = param1.getText()
     valor = int(param2.getText())
 
+    # si hi ha negacio, es filtra amb l'operador complementari
     if neg:
       if op.getText() == '<':
         self.new_data = self.new_data.loc[self.data[nom_col] >= valor]
@@ -159,6 +170,7 @@ class TreeVisitor(pandaQVisitor):
       elif op.getText() == '=':
         self.new_data = self.new_data.loc[self.data[nom_col] != valor]
     
+    # si no hi ha negacio, es filtra amb l'operador original
     else:
       if op.getText() == '<':
         self.new_data = self.new_data.loc[self.data[nom_col] < valor]
