@@ -25,4 +25,6 @@ Per executar l'intèrpret:
 
     4: streamlit run pandaQ2.py (llegir querys desde terminal)
 
-select * from countries where not region_id = 1 and not region_id = 3;
+
+
+* where : la sintaxi de la condició del where ha de ser primer el 'not' si es vol negar la condició, després el nom de la columna per la que es vol filtrar, després l'operador ('<' o '=') i per últim el valor a comparar. Per combinar varies condicions: 'and'
