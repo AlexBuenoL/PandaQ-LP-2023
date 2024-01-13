@@ -23,7 +23,16 @@ class TreeVisitor(pandaQVisitor):
     nom_Tsimbols = ctx.ID().getText()
     self.visit(ctx.query())
     st.session_state.taules_simbols[nom_Tsimbols] = self.new_data
-    st.info(f"Resultat de la consulta guardat en '{nom_Tsimbols}'")
+    st.info("Resultat de la consulta guardat en " + nom_Tsimbols)
+  
+
+  def visitPlot(self, ctx):
+    data_plot = self.visit(ctx.taula())
+    num_cols = data_plot.select_dtypes(include=['number']).columns
+    if num_cols.empty:
+      st.warning("No hi ha columnes disponibles per fer el plot.")
+    else:
+      st.line_chart(data_plot[num_cols])
 
 
   def visitQuery(self, ctx):
