@@ -22,7 +22,7 @@ class TreeVisitor(pandaQVisitor):
     taula = ctx.taula()
     where = ctx.where()
     ord = ctx.orderBy()
-    join = ctx.join_info()
+    joins_list = ctx.join_info()
 
     # obtenir el nom i el path de la taula
     nom_taula = self.visit(taula)
@@ -34,8 +34,9 @@ class TreeVisitor(pandaQVisitor):
 
       # abans de tractar els camps de la taula, es fa el merge de les taules
       # per poder accedir correctament als camps
-      if join is not None:
-        self.visit(join)
+      if joins_list is not None:
+        for join in joins_list:
+          self.visit(join)
 
       # taula buida per anar afegint columnes segons convingui a partir de l'entrada i la taula/es originals
       self.new_data = pd.DataFrame()

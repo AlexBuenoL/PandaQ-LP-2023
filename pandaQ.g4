@@ -2,7 +2,7 @@ grammar pandaQ ;
 
 root : query ;
 
-query : 'select' camps 'from' taula (join_info)? (where)? (orderBy)? ';' ;
+query : 'select' camps 'from' taula (join_info)* (where)? (orderBy)? ';' ;
 
 
 camps : '*' | col (',' col)* ;
