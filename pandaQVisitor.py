@@ -89,6 +89,16 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#compSQ.
+    def visitCompSQ(self, ctx:pandaQParser.CompSQContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#subquery.
+    def visitSubquery(self, ctx:pandaQParser.SubqueryContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#taula.
     def visitTaula(self, ctx:pandaQParser.TaulaContext):
         return self.visitChildren(ctx)

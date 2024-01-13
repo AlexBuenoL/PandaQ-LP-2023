@@ -37,7 +37,10 @@ where : 'where' cond ('and' cond)* ;
 
 cond : ('not')? ID ('<' | '=') ID      # comp_text
      | ('not')? ID ('<' | '=') NUM     # comp_num
+     | ID 'in' '(' subquery ')'        # compSQ
      ;
+
+subquery : 'select' ID 'from' taula ;
 
 taula : ID ;
 

@@ -203,6 +203,18 @@ class TreeVisitor(pandaQVisitor):
         self.new_data = self.new_data.loc[self.data[nom_col] == valor]
 
   
+  def visitCompSQ(self, ctx):
+    col = ctx.ID().getText()
+    res_subconsulta = self.visit(ctx.subquery())
+    self.new_data = self.new_data.loc[self.data[col].isin(res_subconsulta)]
+  
+
+  def visitSubquery(self, ctx):
+    taula = self.visit(ctx.taula())
+    col = ctx.ID().getText()
+    return taula[col]
+
+  
   def visitTaula(self, ctx):
     # obtenir el nom de la taula
     nom_taula = ctx.ID().getText()
