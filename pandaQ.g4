@@ -1,9 +1,10 @@
 grammar pandaQ ;
 
-root : query ;
+root : (query | assig) ';' ;
 
-query : 'select' camps 'from' taula (join_info)* (where)? (orderBy)? ';' ;
+assig : ID ':=' query ;
 
+query : 'select' camps 'from' taula (join_info)* (where)? (orderBy)? ;
 
 camps : '*' | col (',' col)* ;
 

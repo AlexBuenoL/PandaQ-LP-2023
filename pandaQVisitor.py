@@ -14,6 +14,11 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#assig.
+    def visitAssig(self, ctx:pandaQParser.AssigContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#query.
     def visitQuery(self, ctx:pandaQParser.QueryContext):
         return self.visitChildren(ctx)

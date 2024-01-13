@@ -28,3 +28,5 @@ Per executar l'intèrpret:
 
 
 * where : la sintaxi de la condició del where ha de ser primer el 'not' si es vol negar la condició, després el nom de la columna per la que es vol filtrar, després l'operador ('<' o '=') i per últim el valor a comparar. Per combinar varies condicions: 'and'
+
+q := select first_name, last_name, job_title, department_name from employees inner join departments on department_id = department_id inner join jobs on job_id = job_id;

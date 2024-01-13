@@ -6,15 +6,24 @@ from pandaQVisitor import pandaQVisitor
 
 class TreeVisitor(pandaQVisitor):
 
-  # atributs de la classe per poder accedir a les taules desde les funcions del visitor
   def __init__(self):
-    self.data = None 
-    self.new_data = None
+    self.data = None         
+    self.new_data = None    
+
+    if 'taules_simbols' not in st.session_state:
+      st.session_state.taules_simbols = {}
 
 
   def visitRoot(self, ctx):
-    [query] = list(ctx.getChildren())
-    self.visit(query)
+    [op, fin] = list(ctx.getChildren())
+    self.visit(op)
+
+  
+  def visitAssig(self, ctx):
+    nom_Tsimbols = ctx.ID().getText()
+    self.visit(ctx.query())
+    st.session_state.taules_simbols[nom_Tsimbols] = self.new_data
+    st.info(f"Resultat de la consulta guardat en '{nom_Tsimbols}'")
 
 
   def visitQuery(self, ctx):
@@ -24,49 +33,38 @@ class TreeVisitor(pandaQVisitor):
     ord = ctx.orderBy()
     joins_list = ctx.join_info()
 
-    # obtenir el nom i el path de la taula
-    nom_taula = self.visit(taula)
-    path_taula = "data/" + nom_taula + ".csv"
+    # obtenir la taula (de les taules .csv o de les taules de simbols guardades)
+    self.data = self.visit(taula)
 
-    try:
-      # obtenir la taula
-      self.data = pd.read_csv(path_taula)
+    # abans de tractar els camps de la taula, es fa el merge de les taules
+    # per poder accedir correctament als camps
+    if joins_list is not None:
+      for join in joins_list:
+        self.visit(join)
 
-      # abans de tractar els camps de la taula, es fa el merge de les taules
-      # per poder accedir correctament als camps
-      if joins_list is not None:
-        for join in joins_list:
-          self.visit(join)
+    # taula buida per anar afegint columnes segons convingui a partir de l'entrada i la taula/es originals
+    self.new_data = pd.DataFrame()
 
-      # taula buida per anar afegint columnes segons convingui a partir de l'entrada i la taula/es originals
-      self.new_data = pd.DataFrame()
+    # es visiten els camps de la taula a consultar per obtenir la taula 
+    # que es mostrara a 'new_data'
+    self.visit(camps)
 
-      # es visiten els camps de la taula a consultar per obtenir la taula 
-      # que es mostrara a 'new_data'
-      self.visit(camps)
+    # si s'ha afegit el 'where' es visita per fer el filtratge
+    if where is not None:
+      self.visit(where)
 
-      # si s'ha afegit el 'where' es visita per fer el filtratge
-      if where is not None:
-        self.visit(where)
+    # si s'ha afegit el 'order by' es visita per ordenar les files
+    if ord is not None:
+      self.visit(ord)
 
-      # si s'ha afegit el 'order by' es visita per ordenar les files
-      if ord is not None:
-        self.visit(ord)
-
-      st.write("Taula: " + nom_taula)
-      st.write(self.new_data)
-        
-    except FileNotFoundError:
-      st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
+    st.write(self.new_data)
 
   
   def visitJoin_info(self, ctx):
 
     # obtenir la segona taula
-    nom_taula2 = self.visit(ctx.taula())
-    path_taula2 = "data/" + nom_taula2 + ".csv"
-    taula2 = pd.read_csv(path_taula2)
-
+    taula2 = self.visit(ctx.taula())
+  
     # obtenir el nom de les columnes de l'inner join
     nom_camp1, nom_camp2 = ctx.ID()[0].getText(), ctx.ID()[1].getText()
 
@@ -201,7 +199,20 @@ class TreeVisitor(pandaQVisitor):
 
   
   def visitTaula(self, ctx):
-    return ctx.ID().getText()
+    # obtenir el nom de la taula
+    nom_taula = ctx.ID().getText()
+
+    # si el nom de la taula es el de una taula de simbols guardada
+    if nom_taula in st.session_state.taules_simbols:
+      return st.session_state.taules_simbols[nom_taula]
+
+    # si el nom de la taula es .csv
+    else:
+      try:
+        path_taula = "data/" + nom_taula + ".csv"
+        return pd.read_csv(path_taula)
+      except FileNotFoundError:
+        st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
 
 
   def visitID(self, ctx):
