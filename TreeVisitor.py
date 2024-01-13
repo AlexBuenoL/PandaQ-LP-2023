@@ -55,10 +55,6 @@ class TreeVisitor(pandaQVisitor):
     # taula buida per anar afegint columnes segons convingui a partir de l'entrada i la taula/es originals
     self.new_data = pd.DataFrame()
 
-    # es visiten els camps de la taula a consultar per obtenir la taula 
-    # que es mostrara a 'new_data'
-    self.visit(camps)
-
     # si s'ha afegit el 'where' es visita per fer el filtratge
     if where is not None:
       self.visit(where)
@@ -66,6 +62,10 @@ class TreeVisitor(pandaQVisitor):
     # si s'ha afegit el 'order by' es visita per ordenar les files
     if ord is not None:
       self.visit(ord)
+    
+    # es visiten els camps de la taula a consultar per obtenir la taula 
+    # que es mostrara a 'new_data'
+    self.visit(camps)
 
     st.write(self.new_data)
 
@@ -116,7 +116,7 @@ class TreeVisitor(pandaQVisitor):
     order_info = [self.visit(camp) for camp in ctx.camp_order()] # es visiten les columnes a ordenar, obtenint el nom de la columna i (asc o desc)
     columns, ascendings = zip(*order_info) # s'obte una llista amb les columnes a ordenar i un altra amb el tipus d'ordenacio (asc o desc)
 
-    self.new_data.sort_values(by=list(columns), ascending=list(ascendings), inplace=True) # s'ordena la taula
+    self.data.sort_values(by=list(columns), ascending=list(ascendings), inplace=True) # s'ordena la taula
 
 
   # si es posa 'asc' o no es posa res anira a aquest visitor per ordenar ascendentment
@@ -186,24 +186,24 @@ class TreeVisitor(pandaQVisitor):
     # si hi ha negacio, es filtra amb l'operador complementari
     if neg:
       if op.getText() == '<':
-        self.new_data = self.new_data.loc[self.data[nom_col] >= valor]
+        self.data = self.data.loc[self.data[nom_col] >= valor]
         
       elif op.getText() == '=':
-        self.new_data = self.new_data.loc[self.data[nom_col] != valor]
+        self.data = self.data.loc[self.data[nom_col] != valor]
     
     # si no hi ha negacio, es filtra amb l'operador original
     else:
       if op.getText() == '<':
-        self.new_data = self.new_data.loc[self.data[nom_col] < valor]
+        self.data = self.data.loc[self.data[nom_col] < valor]
         
       elif op.getText() == '=':
-        self.new_data = self.new_data.loc[self.data[nom_col] == valor]
+        self.data = self.data.loc[self.data[nom_col] == valor]
 
   
   def visitCompSQ(self, ctx):
     col = ctx.ID().getText()
     res_subconsulta = self.visit(ctx.subquery())
-    self.new_data = self.new_data.loc[self.data[col].isin(res_subconsulta)]
+    self.data = self.data.loc[self.data[col].isin(res_subconsulta)]
   
 
   def visitSubquery(self, ctx):
