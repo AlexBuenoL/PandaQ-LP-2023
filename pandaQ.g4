@@ -44,7 +44,8 @@ subquery : 'select' ID 'from' taula (whereSQ)?;
 
 whereSQ : 'where' condSQ ('and' condSQ)* ;
 
-condSQ : ID '=' NUM 
+condSQ : ('not')? ID ('<' | '=') NUM   # comp_numSQ 
+       | ('not')? ID ('<' | '=') ID    # comp_textSQ
        ;
 
 taula : ID ;

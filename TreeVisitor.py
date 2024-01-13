@@ -216,9 +216,6 @@ class TreeVisitor(pandaQVisitor):
 
     if ctx.whereSQ() is not None:
       self.visit(ctx.whereSQ())
-
-    print(self.taulaSQ)
-    print(self.taulaSQ[col])
     
     return self.taulaSQ[col] # departments[id]
 
@@ -226,12 +223,62 @@ class TreeVisitor(pandaQVisitor):
   def visitWhereSQ(self, ctx):
     for cond in ctx.condSQ():
       self.visit(cond)
-  
 
-  def visitCondSQ(self, ctx):
+
+  def visitComp_numSQ(self, ctx):
+    childs = list(ctx.getChildren())
+
+    # determinar si hi ha negacio
+    if len(childs) == 3:
+      neg = False
+      [col, operacio, val] = childs
+    elif len(childs) == 4:
+      neg = True
+      [_, col, operacio, val] = childs
+
     col = ctx.ID().getText()
     val = int(ctx.NUM().getText())
-    self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] == val]
+    op = operacio.getText()
+
+    if not neg:
+      if op == '<':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] < val]
+      elif op == '=':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] == val]
+
+    else:
+      if op == '<':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] >= val]
+      elif op == '=':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] != val]
+
+
+  def visitComp_numSQ(self, ctx):
+    childs = list(ctx.getChildren())
+
+    # determinar si hi ha negacio
+    if len(childs) == 3:
+      neg = False
+      [col, operacio, val] = childs
+    elif len(childs) == 4:
+      neg = True
+      [_, col, operacio, val] = childs
+
+    col = ctx.ID().getText()
+    val = int(ctx.NUM().getText())
+    op = operacio.getText()
+
+    if not neg:
+      if op == '<':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] < val]
+      elif op == '=':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] == val]
+
+    else:
+      if op == '<':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] >= val]
+      elif op == '=':
+        self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] != val]
 
 
   def visitTaula(self, ctx):

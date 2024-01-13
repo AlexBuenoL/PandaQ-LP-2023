@@ -104,8 +104,13 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#condSQ.
-    def visitCondSQ(self, ctx:pandaQParser.CondSQContext):
+    # Visit a parse tree produced by pandaQParser#comp_numSQ.
+    def visitComp_numSQ(self, ctx:pandaQParser.Comp_numSQContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#comp_textSQ.
+    def visitComp_textSQ(self, ctx:pandaQParser.Comp_textSQContext):
         return self.visitChildren(ctx)
 
 
