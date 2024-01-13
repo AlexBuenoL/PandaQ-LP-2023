@@ -133,10 +133,6 @@ class TreeVisitor(pandaQVisitor):
 
 
   def visitWhere(self, ctx):
-    self.visit(ctx.conds_where())
-  
-
-  def visitConds_where(self, ctx):
     for condition in ctx.cond():
       self.visit(condition)
   

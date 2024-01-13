@@ -33,9 +33,7 @@ camp_order : ID           # asc
            | ID 'desc'    # desc
            ;
 
-where : 'where' conds_where ;
-
-conds_where : cond ('and' cond)* ;
+where : 'where' cond ('and' cond)* ;
 
 cond : ('not')? ID ('<' | '=') ID      # comp_text
      | ('not')? ID ('<' | '=') NUM     # comp_num

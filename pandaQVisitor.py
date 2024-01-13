@@ -79,11 +79,6 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#conds_where.
-    def visitConds_where(self, ctx:pandaQParser.Conds_whereContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by pandaQParser#comp_text.
     def visitComp_text(self, ctx:pandaQParser.Comp_textContext):
         return self.visitChildren(ctx)
