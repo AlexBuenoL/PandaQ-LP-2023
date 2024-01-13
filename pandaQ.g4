@@ -24,9 +24,7 @@ expr : expr ('*' | '/') expr
      | ID
      ;
 
-orderBy : 'order by' order ;
-
-order : camp_order (',' camp_order)* ;
+orderBy : 'order by' camp_order (',' camp_order)* ;
 
 camp_order : ID           # asc
            | ID 'asc'     # asc

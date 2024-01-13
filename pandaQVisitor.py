@@ -59,11 +59,6 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#order.
-    def visitOrder(self, ctx:pandaQParser.OrderContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by pandaQParser#asc.
     def visitAsc(self, ctx:pandaQParser.AscContext):
         return self.visitChildren(ctx)

@@ -113,10 +113,6 @@ class TreeVisitor(pandaQVisitor):
   
 
   def visitOrderBy(self, ctx):
-    self.visit(ctx.order())
-
-  
-  def visitOrder(self, ctx):
     order_info = [self.visit(camp) for camp in ctx.camp_order()] # es visiten les columnes a ordenar, obtenint el nom de la columna i (asc o desc)
     columns, ascendings = zip(*order_info) # s'obte una llista amb les columnes a ordenar i un altra amb el tipus d'ordenacio (asc o desc)
 
