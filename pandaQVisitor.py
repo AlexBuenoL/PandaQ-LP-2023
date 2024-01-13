@@ -34,6 +34,11 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#join_info.
+    def visitJoin_info(self, ctx:pandaQParser.Join_infoContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#expr.
     def visitExpr(self, ctx:pandaQParser.ExprContext):
         return self.visitChildren(ctx)

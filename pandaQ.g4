@@ -2,14 +2,16 @@ grammar pandaQ ;
 
 root : query ;
 
-query : 'select' camps 'from' taula (where)? (orderBy)? ';' ;
+query : 'select' camps 'from' taula (join_info)? (where)? (orderBy)? ';' ;
 
 
 camps : '*' | col (',' col)* ;
 
 col : (expr ' as ' ID)   # campCalculat
     | ID                 # camp
-    ;               
+    ;
+
+join_info : 'inner join' taula 'on' ID '=' ID ;               
 
 expr : expr ('*' | '/') expr
      | expr ('+' | '-') expr

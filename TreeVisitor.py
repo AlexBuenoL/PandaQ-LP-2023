@@ -22,6 +22,7 @@ class TreeVisitor(pandaQVisitor):
     taula = ctx.taula()
     where = ctx.where()
     ord = ctx.orderBy()
+    join = ctx.join_info()
 
     # obtenir el nom i el path de la taula
     nom_taula = self.visit(taula)
@@ -31,7 +32,12 @@ class TreeVisitor(pandaQVisitor):
       # obtenir la taula
       self.data = pd.read_csv(path_taula)
 
-      # taula buida que sera la que es modificara amb els visitors i la que es mostrara
+      # abans de tractar els camps de la taula, es fa el merge de les taules
+      # per poder accedir correctament als camps
+      if join is not None:
+        self.visit(join)
+
+      # taula buida per anar afegint columnes segons convingui a partir de l'entrada i la taula/es originals
       self.new_data = pd.DataFrame()
 
       # es visiten els camps de la taula a consultar per obtenir la taula 
@@ -51,6 +57,20 @@ class TreeVisitor(pandaQVisitor):
         
     except FileNotFoundError:
       st.error("No s'ha trobat l'arxiu csv a la carpeta /data")
+
+  
+  def visitJoin_info(self, ctx):
+
+    # obtenir la segona taula
+    nom_taula2 = self.visit(ctx.taula())
+    path_taula2 = "data/" + nom_taula2 + ".csv"
+    taula2 = pd.read_csv(path_taula2)
+
+    # obtenir el nom de les columnes de l'inner join
+    nom_camp1, nom_camp2 = ctx.ID()[0].getText(), ctx.ID()[1].getText()
+
+    # es fa el inner join utilitzant 'merge' de Pandas
+    self.data = pd.merge(self.data, taula2, how='inner', left_on=nom_camp1, right_on=nom_camp2)
   
 
   def visitCamps(self, ctx):
