@@ -153,18 +153,18 @@ class TreeVisitor(pandaQVisitor):
     # si hi ha negacio, es filtra amb l'operador complementari
     if neg:
       if op.getText() == '<':
-        self.new_data = self.new_data.loc[self.data[nom_col] >= valor]
+        self.data = self.data.loc[self.data[nom_col] >= valor]
         
       elif op.getText() == '=':
-        self.new_data = self.new_data.loc[self.data[nom_col] != valor]
+        self.data = self.data.loc[self.data[nom_col] != valor]
     
     # si no hi ha negacio, es filtra amb l'operador original
     else:
       if op.getText() == '<':
-        self.new_data = self.new_data.loc[self.data[nom_col] < valor]
+        self.data = self.data.loc[self.data[nom_col] < valor]
         
       elif op.getText() == '=':
-        self.new_data = self.new_data.loc[self.data[nom_col] == valor]
+        self.data = self.data.loc[self.data[nom_col] == valor]
 
 
   # Comparacio del 'where' amb numeros 
