@@ -99,6 +99,16 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#whereSQ.
+    def visitWhereSQ(self, ctx:pandaQParser.WhereSQContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#condSQ.
+    def visitCondSQ(self, ctx:pandaQParser.CondSQContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#taula.
     def visitTaula(self, ctx:pandaQParser.TaulaContext):
         return self.visitChildren(ctx)

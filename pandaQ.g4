@@ -40,7 +40,12 @@ cond : ('not')? ID ('<' | '=') ID      # comp_text
      | ID 'in' '(' subquery ')'        # compSQ
      ;
 
-subquery : 'select' ID 'from' taula ;
+subquery : 'select' ID 'from' taula (whereSQ)?;
+
+whereSQ : 'where' condSQ ('and' condSQ)* ;
+
+condSQ : ID '=' NUM 
+       ;
 
 taula : ID ;
 

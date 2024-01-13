@@ -8,7 +8,8 @@ class TreeVisitor(pandaQVisitor):
 
   def __init__(self):
     self.data = None         
-    self.new_data = None    
+    self.new_data = None   
+    self.taulaSQ = None 
 
     if 'taules_simbols' not in st.session_state:
       st.session_state.taules_simbols = {}
@@ -210,11 +211,29 @@ class TreeVisitor(pandaQVisitor):
   
 
   def visitSubquery(self, ctx):
-    taula = self.visit(ctx.taula())
+    self.taulaSQ = self.visit(ctx.taula()) # departments
     col = ctx.ID().getText()
-    return taula[col]
 
+    if ctx.whereSQ() is not None:
+      self.visit(ctx.whereSQ())
+
+    print(self.taulaSQ)
+    print(self.taulaSQ[col])
+    
+    return self.taulaSQ[col] # departments[id]
+
+
+  def visitWhereSQ(self, ctx):
+    for cond in ctx.condSQ():
+      self.visit(cond)
   
+
+  def visitCondSQ(self, ctx):
+    col = ctx.ID().getText()
+    val = int(ctx.NUM().getText())
+    self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] == val]
+
+
   def visitTaula(self, ctx):
     # obtenir el nom de la taula
     nom_taula = ctx.ID().getText()
