@@ -232,8 +232,8 @@ class TreeVisitor(pandaQVisitor):
       neg = True
       [_, col, operacio, val] = childs
 
-    col = ctx.ID().getText()
-    val = int(ctx.NUM().getText())
+    col = col.getText()
+    val = int(val.getText())
     op = operacio.getText()
 
     if not neg:
@@ -249,7 +249,7 @@ class TreeVisitor(pandaQVisitor):
         self.taulaSQ = self.taulaSQ.loc[self.taulaSQ[col] != val]
 
 
-  def visitComp_numSQ(self, ctx):
+  def visitComp_textSQ(self, ctx):
     childs = list(ctx.getChildren())
 
     # determinar si hi ha negacio
@@ -260,8 +260,8 @@ class TreeVisitor(pandaQVisitor):
       neg = True
       [_, col, operacio, val] = childs
 
-    col = ctx.ID().getText()
-    val = int(ctx.NUM().getText())
+    col = col.getText()
+    val = val.getText()
     op = operacio.getText()
 
     if not neg:
