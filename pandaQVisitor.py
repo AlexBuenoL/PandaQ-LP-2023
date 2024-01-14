@@ -74,13 +74,23 @@ class pandaQVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by pandaQParser#comp_num.
+    def visitComp_num(self, ctx:pandaQParser.Comp_numContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#comp_num_neg.
+    def visitComp_num_neg(self, ctx:pandaQParser.Comp_num_negContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by pandaQParser#comp_text.
     def visitComp_text(self, ctx:pandaQParser.Comp_textContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by pandaQParser#comp_num.
-    def visitComp_num(self, ctx:pandaQParser.Comp_numContext):
+    # Visit a parse tree produced by pandaQParser#comp_text_neg.
+    def visitComp_text_neg(self, ctx:pandaQParser.Comp_text_negContext):
         return self.visitChildren(ctx)
 
 
@@ -106,6 +116,16 @@ class pandaQVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by pandaQParser#comp_textSQ.
     def visitComp_textSQ(self, ctx:pandaQParser.Comp_textSQContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#comp_numSQ_neg.
+    def visitComp_numSQ_neg(self, ctx:pandaQParser.Comp_numSQ_negContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by pandaQParser#comp_textSQ_neg.
+    def visitComp_textSQ_neg(self, ctx:pandaQParser.Comp_textSQ_negContext):
         return self.visitChildren(ctx)
 
 

@@ -33,17 +33,21 @@ camp_order : ID           # asc
 
 where : 'where' cond ('and' cond)* ;
 
-cond : ('not')? ID ('<' | '=') ID      # comp_text
-     | ('not')? ID ('<' | '=') NUM     # comp_num
-     | ID 'in' '(' subquery ')'        # compSQ
+cond : ID ('<' | '=') NUM           # comp_num
+     | 'not' ID ('<' | '=') NUM     # comp_num_neg
+     | ID ('<' | '=') ID            # comp_text
+     | 'not' ID ('<' | '=') ID      # comp_text_neg
+     | ID 'in' '(' subquery ')'     # compSQ
      ;
 
 subquery : 'select' ID 'from' taula (whereSQ)?;
 
 whereSQ : 'where' condSQ ('and' condSQ)* ;
 
-condSQ : ('not')? ID ('<' | '=') NUM   # comp_numSQ 
-       | ('not')? ID ('<' | '=') ID    # comp_textSQ
+condSQ : ID ('<' | '=') NUM         # comp_numSQ
+       | ID ('<' | '=') ID          # comp_textSQ
+       | 'not' ID ('<' | '=') NUM   # comp_numSQ_neg
+       | 'not' ID ('<' | '=') ID    # comp_textSQ_neg
        ;
 
 taula : ID ;

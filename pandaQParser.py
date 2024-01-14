@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,28,186,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,28,190,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,1,0,1,0,1,0,3,0,36,8,0,1,0,1,0,1,1,1,1,1,1,1,
         1,1,2,1,2,1,2,1,3,1,3,1,3,1,3,1,3,5,3,52,8,3,10,3,12,3,55,9,3,1,
@@ -19,61 +19,62 @@ def serializedATN():
         1,6,1,6,1,6,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,96,8,7,1,7,1,7,1,
         7,1,7,1,7,1,7,5,7,104,8,7,10,7,12,7,107,9,7,1,8,1,8,1,8,1,8,5,8,
         113,8,8,10,8,12,8,116,9,8,1,9,1,9,1,9,1,9,1,9,3,9,123,8,9,1,10,1,
-        10,1,10,1,10,5,10,129,8,10,10,10,12,10,132,9,10,1,11,3,11,135,8,
-        11,1,11,1,11,1,11,1,11,3,11,141,8,11,1,11,1,11,1,11,1,11,1,11,1,
-        11,1,11,1,11,1,11,3,11,152,8,11,1,12,1,12,1,12,1,12,1,12,3,12,159,
-        8,12,1,13,1,13,1,13,1,13,5,13,165,8,13,10,13,12,13,168,9,13,1,14,
-        3,14,171,8,14,1,14,1,14,1,14,1,14,3,14,177,8,14,1,14,1,14,1,14,3,
-        14,182,8,14,1,15,1,15,1,15,0,1,14,16,0,2,4,6,8,10,12,14,16,18,20,
-        22,24,26,28,30,0,3,2,0,6,6,12,12,1,0,13,14,2,0,11,11,23,23,195,0,
-        35,1,0,0,0,2,39,1,0,0,0,4,43,1,0,0,0,6,46,1,0,0,0,8,71,1,0,0,0,10,
-        78,1,0,0,0,12,80,1,0,0,0,14,95,1,0,0,0,16,108,1,0,0,0,18,122,1,0,
-        0,0,20,124,1,0,0,0,22,151,1,0,0,0,24,153,1,0,0,0,26,160,1,0,0,0,
-        28,181,1,0,0,0,30,183,1,0,0,0,32,36,3,6,3,0,33,36,3,2,1,0,34,36,
-        3,4,2,0,35,32,1,0,0,0,35,33,1,0,0,0,35,34,1,0,0,0,36,37,1,0,0,0,
-        37,38,5,1,0,0,38,1,1,0,0,0,39,40,5,25,0,0,40,41,5,2,0,0,41,42,3,
-        6,3,0,42,3,1,0,0,0,43,44,5,3,0,0,44,45,3,30,15,0,45,5,1,0,0,0,46,
-        47,5,4,0,0,47,48,3,8,4,0,48,49,5,5,0,0,49,53,3,30,15,0,50,52,3,12,
-        6,0,51,50,1,0,0,0,52,55,1,0,0,0,53,51,1,0,0,0,53,54,1,0,0,0,54,57,
-        1,0,0,0,55,53,1,0,0,0,56,58,3,20,10,0,57,56,1,0,0,0,57,58,1,0,0,
-        0,58,60,1,0,0,0,59,61,3,16,8,0,60,59,1,0,0,0,60,61,1,0,0,0,61,7,
-        1,0,0,0,62,72,5,6,0,0,63,68,3,10,5,0,64,65,5,7,0,0,65,67,3,10,5,
-        0,66,64,1,0,0,0,67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,72,
-        1,0,0,0,70,68,1,0,0,0,71,62,1,0,0,0,71,63,1,0,0,0,72,9,1,0,0,0,73,
-        74,3,14,7,0,74,75,5,8,0,0,75,76,5,25,0,0,76,79,1,0,0,0,77,79,5,25,
-        0,0,78,73,1,0,0,0,78,77,1,0,0,0,79,11,1,0,0,0,80,81,5,9,0,0,81,82,
-        3,30,15,0,82,83,5,10,0,0,83,84,5,25,0,0,84,85,5,11,0,0,85,86,5,25,
-        0,0,86,13,1,0,0,0,87,88,6,7,-1,0,88,89,5,15,0,0,89,90,3,14,7,0,90,
-        91,5,16,0,0,91,96,1,0,0,0,92,96,5,26,0,0,93,96,5,27,0,0,94,96,5,
-        25,0,0,95,87,1,0,0,0,95,92,1,0,0,0,95,93,1,0,0,0,95,94,1,0,0,0,96,
-        105,1,0,0,0,97,98,10,6,0,0,98,99,7,0,0,0,99,104,3,14,7,7,100,101,
-        10,5,0,0,101,102,7,1,0,0,102,104,3,14,7,6,103,97,1,0,0,0,103,100,
-        1,0,0,0,104,107,1,0,0,0,105,103,1,0,0,0,105,106,1,0,0,0,106,15,1,
-        0,0,0,107,105,1,0,0,0,108,109,5,17,0,0,109,114,3,18,9,0,110,111,
-        5,7,0,0,111,113,3,18,9,0,112,110,1,0,0,0,113,116,1,0,0,0,114,112,
-        1,0,0,0,114,115,1,0,0,0,115,17,1,0,0,0,116,114,1,0,0,0,117,123,5,
-        25,0,0,118,119,5,25,0,0,119,123,5,18,0,0,120,121,5,25,0,0,121,123,
-        5,19,0,0,122,117,1,0,0,0,122,118,1,0,0,0,122,120,1,0,0,0,123,19,
-        1,0,0,0,124,125,5,20,0,0,125,130,3,22,11,0,126,127,5,21,0,0,127,
-        129,3,22,11,0,128,126,1,0,0,0,129,132,1,0,0,0,130,128,1,0,0,0,130,
-        131,1,0,0,0,131,21,1,0,0,0,132,130,1,0,0,0,133,135,5,22,0,0,134,
-        133,1,0,0,0,134,135,1,0,0,0,135,136,1,0,0,0,136,137,5,25,0,0,137,
-        138,7,2,0,0,138,152,5,25,0,0,139,141,5,22,0,0,140,139,1,0,0,0,140,
-        141,1,0,0,0,141,142,1,0,0,0,142,143,5,25,0,0,143,144,7,2,0,0,144,
-        152,5,26,0,0,145,146,5,25,0,0,146,147,5,24,0,0,147,148,5,15,0,0,
-        148,149,3,24,12,0,149,150,5,16,0,0,150,152,1,0,0,0,151,134,1,0,0,
-        0,151,140,1,0,0,0,151,145,1,0,0,0,152,23,1,0,0,0,153,154,5,4,0,0,
-        154,155,5,25,0,0,155,156,5,5,0,0,156,158,3,30,15,0,157,159,3,26,
-        13,0,158,157,1,0,0,0,158,159,1,0,0,0,159,25,1,0,0,0,160,161,5,20,
-        0,0,161,166,3,28,14,0,162,163,5,21,0,0,163,165,3,28,14,0,164,162,
-        1,0,0,0,165,168,1,0,0,0,166,164,1,0,0,0,166,167,1,0,0,0,167,27,1,
-        0,0,0,168,166,1,0,0,0,169,171,5,22,0,0,170,169,1,0,0,0,170,171,1,
-        0,0,0,171,172,1,0,0,0,172,173,5,25,0,0,173,174,7,2,0,0,174,182,5,
-        26,0,0,175,177,5,22,0,0,176,175,1,0,0,0,176,177,1,0,0,0,177,178,
-        1,0,0,0,178,179,5,25,0,0,179,180,7,2,0,0,180,182,5,25,0,0,181,170,
-        1,0,0,0,181,176,1,0,0,0,182,29,1,0,0,0,183,184,5,25,0,0,184,31,1,
-        0,0,0,21,35,53,57,60,68,71,78,95,103,105,114,122,130,134,140,151,
-        158,166,170,176,181
+        10,1,10,1,10,5,10,129,8,10,10,10,12,10,132,9,10,1,11,1,11,1,11,1,
+        11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,
+        11,1,11,1,11,1,11,3,11,154,8,11,1,12,1,12,1,12,1,12,1,12,3,12,161,
+        8,12,1,13,1,13,1,13,1,13,5,13,167,8,13,10,13,12,13,170,9,13,1,14,
+        1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,
+        3,14,186,8,14,1,15,1,15,1,15,0,1,14,16,0,2,4,6,8,10,12,14,16,18,
+        20,22,24,26,28,30,0,3,2,0,6,6,12,12,1,0,13,14,2,0,11,11,22,22,199,
+        0,35,1,0,0,0,2,39,1,0,0,0,4,43,1,0,0,0,6,46,1,0,0,0,8,71,1,0,0,0,
+        10,78,1,0,0,0,12,80,1,0,0,0,14,95,1,0,0,0,16,108,1,0,0,0,18,122,
+        1,0,0,0,20,124,1,0,0,0,22,153,1,0,0,0,24,155,1,0,0,0,26,162,1,0,
+        0,0,28,185,1,0,0,0,30,187,1,0,0,0,32,36,3,6,3,0,33,36,3,2,1,0,34,
+        36,3,4,2,0,35,32,1,0,0,0,35,33,1,0,0,0,35,34,1,0,0,0,36,37,1,0,0,
+        0,37,38,5,1,0,0,38,1,1,0,0,0,39,40,5,25,0,0,40,41,5,2,0,0,41,42,
+        3,6,3,0,42,3,1,0,0,0,43,44,5,3,0,0,44,45,3,30,15,0,45,5,1,0,0,0,
+        46,47,5,4,0,0,47,48,3,8,4,0,48,49,5,5,0,0,49,53,3,30,15,0,50,52,
+        3,12,6,0,51,50,1,0,0,0,52,55,1,0,0,0,53,51,1,0,0,0,53,54,1,0,0,0,
+        54,57,1,0,0,0,55,53,1,0,0,0,56,58,3,20,10,0,57,56,1,0,0,0,57,58,
+        1,0,0,0,58,60,1,0,0,0,59,61,3,16,8,0,60,59,1,0,0,0,60,61,1,0,0,0,
+        61,7,1,0,0,0,62,72,5,6,0,0,63,68,3,10,5,0,64,65,5,7,0,0,65,67,3,
+        10,5,0,66,64,1,0,0,0,67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,
+        72,1,0,0,0,70,68,1,0,0,0,71,62,1,0,0,0,71,63,1,0,0,0,72,9,1,0,0,
+        0,73,74,3,14,7,0,74,75,5,8,0,0,75,76,5,25,0,0,76,79,1,0,0,0,77,79,
+        5,25,0,0,78,73,1,0,0,0,78,77,1,0,0,0,79,11,1,0,0,0,80,81,5,9,0,0,
+        81,82,3,30,15,0,82,83,5,10,0,0,83,84,5,25,0,0,84,85,5,11,0,0,85,
+        86,5,25,0,0,86,13,1,0,0,0,87,88,6,7,-1,0,88,89,5,15,0,0,89,90,3,
+        14,7,0,90,91,5,16,0,0,91,96,1,0,0,0,92,96,5,26,0,0,93,96,5,27,0,
+        0,94,96,5,25,0,0,95,87,1,0,0,0,95,92,1,0,0,0,95,93,1,0,0,0,95,94,
+        1,0,0,0,96,105,1,0,0,0,97,98,10,6,0,0,98,99,7,0,0,0,99,104,3,14,
+        7,7,100,101,10,5,0,0,101,102,7,1,0,0,102,104,3,14,7,6,103,97,1,0,
+        0,0,103,100,1,0,0,0,104,107,1,0,0,0,105,103,1,0,0,0,105,106,1,0,
+        0,0,106,15,1,0,0,0,107,105,1,0,0,0,108,109,5,17,0,0,109,114,3,18,
+        9,0,110,111,5,7,0,0,111,113,3,18,9,0,112,110,1,0,0,0,113,116,1,0,
+        0,0,114,112,1,0,0,0,114,115,1,0,0,0,115,17,1,0,0,0,116,114,1,0,0,
+        0,117,123,5,25,0,0,118,119,5,25,0,0,119,123,5,18,0,0,120,121,5,25,
+        0,0,121,123,5,19,0,0,122,117,1,0,0,0,122,118,1,0,0,0,122,120,1,0,
+        0,0,123,19,1,0,0,0,124,125,5,20,0,0,125,130,3,22,11,0,126,127,5,
+        21,0,0,127,129,3,22,11,0,128,126,1,0,0,0,129,132,1,0,0,0,130,128,
+        1,0,0,0,130,131,1,0,0,0,131,21,1,0,0,0,132,130,1,0,0,0,133,134,5,
+        25,0,0,134,135,7,2,0,0,135,154,5,26,0,0,136,137,5,23,0,0,137,138,
+        5,25,0,0,138,139,7,2,0,0,139,154,5,26,0,0,140,141,5,25,0,0,141,142,
+        7,2,0,0,142,154,5,25,0,0,143,144,5,23,0,0,144,145,5,25,0,0,145,146,
+        7,2,0,0,146,154,5,25,0,0,147,148,5,25,0,0,148,149,5,24,0,0,149,150,
+        5,15,0,0,150,151,3,24,12,0,151,152,5,16,0,0,152,154,1,0,0,0,153,
+        133,1,0,0,0,153,136,1,0,0,0,153,140,1,0,0,0,153,143,1,0,0,0,153,
+        147,1,0,0,0,154,23,1,0,0,0,155,156,5,4,0,0,156,157,5,25,0,0,157,
+        158,5,5,0,0,158,160,3,30,15,0,159,161,3,26,13,0,160,159,1,0,0,0,
+        160,161,1,0,0,0,161,25,1,0,0,0,162,163,5,20,0,0,163,168,3,28,14,
+        0,164,165,5,21,0,0,165,167,3,28,14,0,166,164,1,0,0,0,167,170,1,0,
+        0,0,168,166,1,0,0,0,168,169,1,0,0,0,169,27,1,0,0,0,170,168,1,0,0,
+        0,171,172,5,25,0,0,172,173,7,2,0,0,173,186,5,26,0,0,174,175,5,25,
+        0,0,175,176,7,2,0,0,176,186,5,25,0,0,177,178,5,23,0,0,178,179,5,
+        25,0,0,179,180,7,2,0,0,180,186,5,26,0,0,181,182,5,23,0,0,182,183,
+        5,25,0,0,183,184,7,2,0,0,184,186,5,25,0,0,185,171,1,0,0,0,185,174,
+        1,0,0,0,185,177,1,0,0,0,185,181,1,0,0,0,186,29,1,0,0,0,187,188,5,
+        25,0,0,188,31,1,0,0,0,17,35,53,57,60,68,71,78,95,103,105,114,122,
+        130,153,160,168,185
     ]
 
 class pandaQParser ( Parser ):
@@ -89,7 +90,7 @@ class pandaQParser ( Parser ):
     literalNames = [ "<INVALID>", "';'", "':='", "'plot'", "'select'", "'from'", 
                      "'*'", "','", "' as '", "'inner join'", "'on'", "'='", 
                      "'/'", "'+'", "'-'", "'('", "')'", "'order by'", "'asc'", 
-                     "'desc'", "'where'", "'and'", "'not'", "'<'", "'in'" ]
+                     "'desc'", "'where'", "'and'", "'<'", "'not'", "'in'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
@@ -997,6 +998,43 @@ class pandaQParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
+    class Comp_num_negContext(CondContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a pandaQParser.CondContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def ID(self):
+            return self.getToken(pandaQParser.ID, 0)
+        def NUM(self):
+            return self.getToken(pandaQParser.NUM, 0)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitComp_num_neg" ):
+                return visitor.visitComp_num_neg(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+    class Comp_text_negContext(CondContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a pandaQParser.CondContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def ID(self, i:int=None):
+            if i is None:
+                return self.getTokens(pandaQParser.ID)
+            else:
+                return self.getToken(pandaQParser.ID, i)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitComp_text_neg" ):
+                return visitor.visitComp_text_neg(self)
+            else:
+                return visitor.visitChildren(self)
+
+
     class Comp_numContext(CondContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a pandaQParser.CondContext
@@ -1041,69 +1079,89 @@ class pandaQParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_cond)
         self._la = 0 # Token type
         try:
-            self.state = 151
+            self.state = 153
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,15,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
             if la_ == 1:
-                localctx = pandaQParser.Comp_textContext(self, localctx)
+                localctx = pandaQParser.Comp_numContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 134
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==22:
-                    self.state = 133
-                    self.match(pandaQParser.T__21)
-
-
-                self.state = 136
+                self.state = 133
                 self.match(pandaQParser.ID)
-                self.state = 137
+                self.state = 134
                 _la = self._input.LA(1)
-                if not(_la==11 or _la==23):
+                if not(_la==11 or _la==22):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 138
-                self.match(pandaQParser.ID)
+                self.state = 135
+                self.match(pandaQParser.NUM)
                 pass
 
             elif la_ == 2:
-                localctx = pandaQParser.Comp_numContext(self, localctx)
+                localctx = pandaQParser.Comp_num_negContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 140
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==22:
-                    self.state = 139
-                    self.match(pandaQParser.T__21)
-
-
-                self.state = 142
+                self.state = 136
+                self.match(pandaQParser.T__22)
+                self.state = 137
                 self.match(pandaQParser.ID)
-                self.state = 143
+                self.state = 138
                 _la = self._input.LA(1)
-                if not(_la==11 or _la==23):
+                if not(_la==11 or _la==22):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 144
+                self.state = 139
                 self.match(pandaQParser.NUM)
                 pass
 
             elif la_ == 3:
-                localctx = pandaQParser.CompSQContext(self, localctx)
+                localctx = pandaQParser.Comp_textContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 145
+                self.state = 140
                 self.match(pandaQParser.ID)
+                self.state = 141
+                _la = self._input.LA(1)
+                if not(_la==11 or _la==22):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
+                self.state = 142
+                self.match(pandaQParser.ID)
+                pass
+
+            elif la_ == 4:
+                localctx = pandaQParser.Comp_text_negContext(self, localctx)
+                self.enterOuterAlt(localctx, 4)
+                self.state = 143
+                self.match(pandaQParser.T__22)
+                self.state = 144
+                self.match(pandaQParser.ID)
+                self.state = 145
+                _la = self._input.LA(1)
+                if not(_la==11 or _la==22):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
                 self.state = 146
-                self.match(pandaQParser.T__23)
+                self.match(pandaQParser.ID)
+                pass
+
+            elif la_ == 5:
+                localctx = pandaQParser.CompSQContext(self, localctx)
+                self.enterOuterAlt(localctx, 5)
                 self.state = 147
-                self.match(pandaQParser.T__14)
+                self.match(pandaQParser.ID)
                 self.state = 148
-                self.subquery()
+                self.match(pandaQParser.T__23)
                 self.state = 149
+                self.match(pandaQParser.T__14)
+                self.state = 150
+                self.subquery()
+                self.state = 151
                 self.match(pandaQParser.T__15)
                 pass
 
@@ -1154,19 +1212,19 @@ class pandaQParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 153
-            self.match(pandaQParser.T__3)
-            self.state = 154
-            self.match(pandaQParser.ID)
             self.state = 155
-            self.match(pandaQParser.T__4)
+            self.match(pandaQParser.T__3)
             self.state = 156
-            self.taula()
+            self.match(pandaQParser.ID)
+            self.state = 157
+            self.match(pandaQParser.T__4)
             self.state = 158
+            self.taula()
+            self.state = 160
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==20:
-                self.state = 157
+                self.state = 159
                 self.whereSQ()
 
 
@@ -1212,19 +1270,19 @@ class pandaQParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 160
+            self.state = 162
             self.match(pandaQParser.T__19)
-            self.state = 161
+            self.state = 163
             self.condSQ()
-            self.state = 166
+            self.state = 168
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==21:
-                self.state = 162
+                self.state = 164
                 self.match(pandaQParser.T__20)
-                self.state = 163
+                self.state = 165
                 self.condSQ()
-                self.state = 168
+                self.state = 170
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1252,6 +1310,24 @@ class pandaQParser ( Parser ):
         def copyFrom(self, ctx:ParserRuleContext):
             super().copyFrom(ctx)
 
+
+
+    class Comp_numSQ_negContext(CondSQContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a pandaQParser.CondSQContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def ID(self):
+            return self.getToken(pandaQParser.ID, 0)
+        def NUM(self):
+            return self.getToken(pandaQParser.NUM, 0)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitComp_numSQ_neg" ):
+                return visitor.visitComp_numSQ_neg(self)
+            else:
+                return visitor.visitChildren(self)
 
 
     class Comp_textSQContext(CondSQContext):
@@ -1291,6 +1367,25 @@ class pandaQParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
+    class Comp_textSQ_negContext(CondSQContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a pandaQParser.CondSQContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def ID(self, i:int=None):
+            if i is None:
+                return self.getTokens(pandaQParser.ID)
+            else:
+                return self.getToken(pandaQParser.ID, i)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitComp_textSQ_neg" ):
+                return visitor.visitComp_textSQ_neg(self)
+            else:
+                return visitor.visitChildren(self)
+
+
 
     def condSQ(self):
 
@@ -1298,54 +1393,74 @@ class pandaQParser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_condSQ)
         self._la = 0 # Token type
         try:
-            self.state = 181
+            self.state = 185
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
             if la_ == 1:
                 localctx = pandaQParser.Comp_numSQContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 170
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==22:
-                    self.state = 169
-                    self.match(pandaQParser.T__21)
-
-
-                self.state = 172
+                self.state = 171
                 self.match(pandaQParser.ID)
-                self.state = 173
+                self.state = 172
                 _la = self._input.LA(1)
-                if not(_la==11 or _la==23):
+                if not(_la==11 or _la==22):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 174
+                self.state = 173
                 self.match(pandaQParser.NUM)
                 pass
 
             elif la_ == 2:
                 localctx = pandaQParser.Comp_textSQContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 176
-                self._errHandler.sync(self)
+                self.state = 174
+                self.match(pandaQParser.ID)
+                self.state = 175
                 _la = self._input.LA(1)
-                if _la==22:
-                    self.state = 175
-                    self.match(pandaQParser.T__21)
+                if not(_la==11 or _la==22):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
+                self.state = 176
+                self.match(pandaQParser.ID)
+                pass
 
-
+            elif la_ == 3:
+                localctx = pandaQParser.Comp_numSQ_negContext(self, localctx)
+                self.enterOuterAlt(localctx, 3)
+                self.state = 177
+                self.match(pandaQParser.T__22)
                 self.state = 178
                 self.match(pandaQParser.ID)
                 self.state = 179
                 _la = self._input.LA(1)
-                if not(_la==11 or _la==23):
+                if not(_la==11 or _la==22):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 180
+                self.match(pandaQParser.NUM)
+                pass
+
+            elif la_ == 4:
+                localctx = pandaQParser.Comp_textSQ_negContext(self, localctx)
+                self.enterOuterAlt(localctx, 4)
+                self.state = 181
+                self.match(pandaQParser.T__22)
+                self.state = 182
+                self.match(pandaQParser.ID)
+                self.state = 183
+                _la = self._input.LA(1)
+                if not(_la==11 or _la==22):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
+                self.state = 184
                 self.match(pandaQParser.ID)
                 pass
 
@@ -1387,7 +1502,7 @@ class pandaQParser ( Parser ):
         self.enterRule(localctx, 30, self.RULE_taula)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 183
+            self.state = 187
             self.match(pandaQParser.ID)
         except RecognitionException as re:
             localctx.exception = re
