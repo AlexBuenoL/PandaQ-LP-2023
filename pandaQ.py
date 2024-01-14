@@ -11,7 +11,7 @@ from antlr4 import *
 
 st.title('PandaQ - LP 2023')
 
-query = st.text_input("Consulta SQL:")
+query = st.text_area("Consulta SQL:", height=110)
   
 if st.button("Executa"):
   lexer = pandaQLexer(InputStream(query))

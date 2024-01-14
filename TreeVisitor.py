@@ -68,7 +68,8 @@ class TreeVisitor(pandaQVisitor):
     # el resultat de 'new_data' sera correcte perque es mantindra l'ordre i el filtratge de 'data'
     self.new_data = pd.DataFrame()
     self.visit(ctx.camps())
-
+    
+    # si no hi ha hagut cap error, es mostra la taula
     if not self.error:
       st.write(self.new_data)
 
