@@ -6,7 +6,6 @@ from pandaQParser import pandaQParser
 
 from antlr4 import *
 
-
 #SCRIPT PER LLEGIR LES CONSULTES DES DE STREAMLIT
 
 st.title('PandaQ - LP 2023')
